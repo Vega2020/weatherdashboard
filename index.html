@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Weather Dashboard</title>
+  
+  <!-- bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Navbar</span>
+  </nav>
+
+  <container>
+    <div class="row">
+      
+    </div>
+
+  </container>
+
+  <!-- Retrieved data will be dumped here -->
+  <div class="city"></div>
+  <div class="wind"></div>
+  <div class="humidity"></div>
+  <div class="temp"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // This is my API key.
+    var APIKey = "84733b4b40205836872f7d15403843d8";
+
+    // Here we are building the URL we need to query the database
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=Bujumbura,Burundi&appid=" + APIKey;
+
+    // We then created an AJAX call
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+
+      // Create CODE HERE to Log the queryURL
+      console.log(queryURL);
+      
+      // Create CODE HERE to log the resulting object
+      console.log(response);
+      
+      // Create CODE HERE to calculate the temperature (converted from Kelvin)
+      // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
+      // OR just put "units=imperial" into the queryURL, problem solved.
+
+      // Create CODE HERE to transfer content to HTML
+      // What's going on here is the response is an object, and we're declaring variables that are pulled from keys of that object.
+      var city = response.name;
+      var windSpeed = response.wind.speed;
+      var humidity = response.main.humidity;
+      var temp = response.main.temp;
+
+      // Then we have our divs display that as its text.
+      $(".city").text(city);
+      $(".wind").text(windSpeed);
+      $(".humidity").text(humidity);
+      $(".temp").text(temp);
+
+      // Create CODE HERE to dump the temperature content into HTML
+
+
+    });
+  </script>
+
+<!-- bootstrap js resources -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
