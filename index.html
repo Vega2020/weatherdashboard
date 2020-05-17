@@ -19,7 +19,15 @@
 
   <container>
     <div class="row">
-      <div class="col-md-3 left-column">left column
+      <div class="col-md-3 left-column">
+        <form class="bd-search d-flex align-items-center">
+          <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;">
+            <!-- search bar code from below comes from bootstrap.com inspect; will probably need to be changed to fit my javascript -->
+            <input type="search" class="form-control ds-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+            <span class="ds-dropdown-menu" role="listbox" id="algolia-autocomplete-listbox-0" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;"><div class="ds-dataset-1"></div></span>
+            <!-- end code from bootstrap.com inspection -->
+          </span><br><br>
+        </form>
         <ul class="list-group" id="recentlySearchedList">
           <li class="list-group-item">
             test item
