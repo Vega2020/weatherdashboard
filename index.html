@@ -19,17 +19,33 @@
 
   <container>
     <div class="row">
-      <div class="col-md-3 left-column">left column</div>
-      <div class="col-md-9 right-column">right column</div>
+      <div class="col-md-3 left-column">left column
+        <ul class="list-group" id="recentlySearchedList">
+          <li class="list-group-item">
+            test item
+          </li>
+          <li class="list-group-item">
+            test item 2
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9 right-column">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Weather data here. This div will be where the city name goes.</h1>
+            <p class="lead">Divs with temperature info and so on will go here</p>
+          </div>
+        </div>
+      </div>
     </div>
 
   </container>
 
-  <!-- Retrieved data will be dumped here. these are leftover divs from the class example -->
-  <div class="city"></div>
+  <!-- Retrieved data will be dumped here. these are leftover divs from the class example. with these commented out, the ajax function below has nowhere to put its data. -->
+  <!-- <div class="city"></div>
   <div class="wind"></div>
   <div class="humidity"></div>
-  <div class="temp"></div>
+  <div class="temp"></div> -->
   
   <!-- this link is enabling jquery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -1,6 +1,7 @@
 # weatherdashboard
 Weather Dashboard app for U of A full stack boot camp homework 6.
 
+# pseudocode
 GIVEN a weather dashboard with form inputs - (requires html page and form, make with bootstrap-)
 
 WHEN I search for a city - (take search inputs from page and run them through ajax call)
@@ -19,12 +20,12 @@ THEN I am again presented with current and future conditions for that city - (on
 
 WHEN I open the weather dashboard, THEN I am presented with the last searched city forecast - (load the array of searched cities when the page loads)
 
+# steps
+Front end: 
+1: layout bootstrap wireframe with placeholders
 
-Pseudocode:
+back end:
+1: jquery calls for each thing we need to search, set variables within ajax function
 
- Front end: 
- 1: layout bootstrap wireframe with placeholders
-
-
- back end:
- 1: jquery calls for each thing we need to search
+# updates
+1 - commit 3 or so. Cannot get bootstrap navbar to center. Successfully have main row and columns working, now need to add bootstrap component classes to them. I have found that inspecting the code of tutorial pages that use bootstrap is as helpful as actually reading the tutorials. my next step is to work on adding bootstrap components to the columns I just created.
