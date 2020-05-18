@@ -12,15 +12,17 @@
 // WHEN I open the weather dashboard
 // THEN I am presented with the last searched city forecast
 
+//this gets today's date from moment.js and stores it as a variable
+    const todaysDate = moment().format("MMM DD YYYY");
 
-//code from class bujumbura example
-    // This is my API key for the weather info service.
+// This is my API key for the weather info service.
     var APIKey = "84733b4b40205836872f7d15403843d8";
 
-    //create a variable for the city input by the user and add it to the queryURL
+//create a variable for the city input by the user and add it to the queryURL:
+    var query = $("#search-input").val();
 
     // Here we are building the URL we need to query the database. we'll change this (or maybe make additional ones) for current project. We will have to create functions that turn user search parameters into variables and then append those variables to the url. There's code for this in the news article group project. Change it to backticks so you can use jquery to build the url and delete the stuff about burundi.
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=Bujumbura,Burundi&appid=" + APIKey;
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?units=imperial&q=${query}&appid=${APIKey}`;
 
     // We then create an AJAX call
     $.ajax({
@@ -52,24 +54,24 @@
 
 
 //code from class demo
-var APIKey = "your api key here";
-function getWeather(city) {
-    var queryURL= `https://api.openweathermap.org/data/2.5/weather?q=$`
-};
+// var APIKey = "your api key here";
+// function getWeather(city) {
+//     var queryURL= `https://api.openweathermap.org/data/2.5/weather?q=$`
+// };
 
-function getUv(lat, lon) {
-    const queryUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIkey}&lat=${lat}&long={lon}`;
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-    })
-    .then(function (response) {
-        console.log(response);
-    });
-}
+// function getUv(lat, lon) {
+//     const queryUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIkey}&lat=${lat}&long={lon}`;
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET",
+//     })
+//     .then(function (response) {
+//         console.log(response);
+//     });
+// }
 
-function fiveDayForecast(lat, lon){
+// function fiveDayForecast(lat, lon){
 
-}
+// }
 
-getWeather("Gilbert");
+// getWeather("Gilbert");
