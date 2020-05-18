@@ -1,86 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Weather Dashboard</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Weather Dashboard</title>
-  
-  <!-- bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+    <!-- bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
+  <body>
+    <!-- bootstrap nav bar. doesn't need to do anything for this app -->
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
+    </nav>
 
-  <!-- bootstrap nav bar. doesn't need to do anything? -->
-  <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
-  </nav>
+    <container>
+      <!-- row containing search bar, history column, and main display: -->
+      <div class="row">
+        <!-- column containing search bar and history column: -->
+        <div class="col-md-3 left-column">
+          <!-- search bar element with input below: -->
+          <form
+            class="input-group bd-search d-flex align-items-center"
+            id="searchForm"
+          >
+            <span
+              class="algolia-autocomplete"
+              style="position: relative; display: inline-block; direction: ltr;"
+            >
+              <!-- search bar code from below comes from bootstrap.com inspect; will probably need to be changed to fit my javascript -->
+              <input
+                type="text"
+                class="form-control ds-input"
+                id="search-input"
+                placeholder="Search..."
+                aria-label="Search for..."
+                autocomplete="off"
+                spellcheck="false"
+                style="position: relative; vertical-align: top;"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text" id="searchButton">Search</span>
+              </div>
+              <span
+                class="ds-dropdown-menu"
+                role="listbox"
+                id="algolia-autocomplete-listbox-0"
+                style="
+                  position: absolute;
+                  top: 100%;
+                  z-index: 100;
+                  display: none;
+                  left: 0px;
+                  right: auto;
+                "
+                ><div class="ds-dataset-1"></div
+              ></span>
+              <!-- end code from bootstrap.com inspection --> </span
+            ><br /><br />
+            <!-- change above br's to padding/margins/borders to space out these elements -->
+          </form>
 
-  <container>
-    <!-- row containing search bar, history column, and main display: -->
-    <div class="row">
-      <!-- column containing search bar and history column: -->
-      <div class="col-md-3 left-column">
-        <!-- search bar element with input below: -->
-        <form class="input-group bd-search d-flex align-items-center">
-          <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;">
-            <!-- search bar code from below comes from bootstrap.com inspect; will probably need to be changed to fit my javascript -->
-            <input type="text" class="form-control ds-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" spellcheck="false" style="position: relative; vertical-align: top;">
-            <div class="input-group-append"><span class="input-group-text" id="searchButton">Search</span></div>
-            <span class="ds-dropdown-menu" role="listbox" id="algolia-autocomplete-listbox-0" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;"><div class="ds-dataset-1"></div></span>
-            <!-- end code from bootstrap.com inspection -->
-          </span><br><br>
-          <!-- change above br's to padding/margins/borders to space out these elements -->
-        </form>
-        <!-- this is the ul that will be populated with recently searched, need function to generate additional <li>'s from form input -->
-        <ul class="list-group" id="recentlySearchedList">
-          <li class="list-group-item">
-            test item
-          </li>
-          <li class="list-group-item">
-            test item 2
-          </li>
-          <!-- the above test items will be removed when function to populate list is working -->
-        </ul>
-      </div>
-      <!-- column containing main display starts below, five day forecast cards will go under it in the same column -->
-      <div class="col-md-9 right-column">
-        <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-            <!-- these divs are already linked to the ajax function in our js document -->
-            <div class="display-4 city"></div>
-            <br>
-            <div class="wind"></div>
-            <div class="humidity"></div>
-            <div class="temp"></div>
-            <p>add more divs to this container to add more info</p>
+          <!-- this is the ul that will be populated with recently searched, need function to generate additional <li>'s from form input -->
+          <ul class="list-group" id="recentlySearchedList">
+            <li class="list-group-item">
+              test item
+            </li>
+            <li class="list-group-item">
+              test item 2
+            </li>
+            <!-- the above test items will be removed when function to populate list is working -->
+          </ul>
+        </div>
+
+        <!-- column containing main display starts below, five day forecast cards will go under it in the same column -->
+        <div class="col-md-9 right-column">
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <!-- these divs are already linked to the ajax function in our js document -->
+              <div class="display-4 city"></div><div id="weatherIconDisplay"></div>
+              <br />
+              <div class="wind"></div>
+              <div class="humidity"></div>
+              <div class="temp"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </container>
 
-  </container>
-  
-  
-  
-  
     <!-- enables moment.js. the load order of this doesn't seem to make a difference yet. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  
-  <!-- bootstrap js resources -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  
-  <!-- this link is enabling jquery. this has to be below the bootstrap resources or the title card breaks.-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
-  
 
-<!-- link to my js document -->
-<script src="script.js"></script>
+    <!-- bootstrap js resources -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
-</body>
+    <!-- this link is enabling jquery. this has to be below the bootstrap resources or the title card breaks.-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- link to my js document -->
+    <script src="script.js"></script>
+  </body>
 </html>
