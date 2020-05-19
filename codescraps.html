@@ -1,0 +1,45 @@
+//code from class demo
+    // var APIKey = "your api key here";
+    // function getWeather(city) {
+        //     var queryURL= `https://api.openweathermap.org/data/2.5/weather?q=$`
+        // };
+        
+        // function getUv(lat, lon) {
+//     const queryUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIkey}&lat=${lat}&long={lon}`;
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET",
+//     })
+//     .then(function (response) {
+//         console.log(response);
+//     });
+// }
+
+// function fiveDayForecast(lat, lon){
+
+// }
+
+//this function is meant to search for city when the enter key is pressed on the search form. currently doesn't work, maybe because of preventdefault?
+$("#search-input").on('keypress',function(e) {
+    if(e.which == 13) {
+        var city = $("#search-input").val().trim();
+        callWeather(city);
+    }
+});
+
+
+// this line is supposed to push everything in the history into the historyList array, but it throws an error saying push isn't a function
+//var newHistory = history.push(historyList);
+
+
+//code from classmate for building the history
+previousCities = []
+localStorage.setItem("history", JSON.stringify(previousCities));
+
+
+//have to declare an empty array, load the history list, then push the new city to it, then save it again? this is duplicated by the researched code below
+//var historyList = localStorage.getItem("history");
+//this is duplicated by researched code
+    //historyList.push(city);
+    //localStorage.setItem("history", historyList);
+    //console.log(historyList);

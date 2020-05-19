@@ -1,7 +1,7 @@
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 // WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+// THEN I am presented with the city name (check), the date(check), an icon representation of weather conditions(check), the temperature(check), the humidity(check), the wind speed(Check), and the UV index
 // WHEN I view the UV index
 // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 // WHEN I view future weather conditions for that city
@@ -20,12 +20,9 @@ var APIKey = "84733b4b40205836872f7d15403843d8";
 //create a variable for the city input by the user and add it to the queryURL:
 var query = $("#search-input").val();
 
-var historyList = ["boston", ];
+//there was an empty array declared historylist here, making the functions below work. deleted it to avoid declaring the historylist as an empty function. must save and load it only out of local memory to avoid it resetting itself every time.
 
 var history = localStorage.getItem("history");
-
-// this line is supposed to push everything in the history into the historyList array, but it throws an error saying push isn't a function
-//var newHistory = history.push(historyList);
 
 //this is the beginning of the main call weather function
 function callWeather(city) {
@@ -47,10 +44,22 @@ function callWeather(city) {
     var windSpeed = response.wind.speed;
     var humidity = response.main.humidity;
     var temp = response.main.temp;
+    
+    //LOCAL STORAGE CODE FROM INTERNET
+    // Get the existing data
+    var existing = localStorage.getItem("history");
 
-    historyList.push(city);//will have to add if-else function to prevent cities from duplicating on list
-    localStorage.setItem("history", historyList);
-    console.log(historyList);
+    // If no existing data, create an array
+    // Otherwise, convert the localStorage string to an array
+    existing = existing ? existing.split(',') : [];
+
+    // Add new data to localStorage Array. The if statement prevents cities from being duplicated!
+    if (!existing.includes(city)) existing.push(city);
+
+    console.log(existing);
+    // Save back to localStorage
+    localStorage.setItem("history", existing.toString());
+    //END LOCAL STORAGE CODE FROM INTERNET
 
     // this saves the searched city to local storage to be accessed when the page loads
     localStorage.setItem("lastSearched", city);
@@ -60,7 +69,7 @@ function callWeather(city) {
     $("#weatherIconDisplay").html($("<img>").attr("src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png"));
     $(".wind").text("Wind speed: " + windSpeed);
     $(".humidity").text("Humidity: " + humidity + "%");
-    $(".temp").text(temp);
+    $(".temp").text("Temperature: " + temp);
 
     
 });//this is the closing bracket for the ajax call.
@@ -74,15 +83,6 @@ $("#searchButton").on("click", function() {
 });
 
 
-
-
 //this gets the most recent city from local storage and displays it when the page loads
 var mostRecent = localStorage.getItem("lastSearched")
 callWeather (mostRecent);
-
-//code from class for building the history
-previousCities = []
-localStorage.setItem("history", JSON.stringify(previousCities));
-
-
-
