@@ -31,3 +31,5 @@ back end:
 1 - commit 3 or so. Cannot get bootstrap navbar to center. Successfully have main row and columns working, now need to add bootstrap component classes to them. I have found that inspecting the code of tutorial pages that use bootstrap is as helpful as actually reading the tutorials. my next step is to work on adding bootstrap components to the columns I just created.
 
 2 - commit 6 or so. have improved jumbotron. working on building the query for the api; need to create a button to go with the search bar, then set a variable in js file for the user input, and then build it into the api url with jquery. this is why the jumbotron is currently broken, it will work again when the code to build the query url has been fixed.
+
+3 - commit ~12. got help in class with some syntax. Small details make a difference. Through using google, annotation to make sure I understand each piece of my code, and lots of testing I have gotten most of the funtionality to work and have learned a lot about integrating ajax calls and functions in general into javascript and outputting the results to html, which are the key skills for integrating the front and back end.
