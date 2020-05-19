@@ -113,7 +113,8 @@ function historyColumn() {
 };//closing bracket for historycolumn function
 
 //this is the function for the search button. It would be good to make it operate on form submission instead.
-$("#searchButton").on("click", function() {
+$("#searchForm").on("submit", function(e) {
+    e.preventDefault()
     var city = $("#search-input").val().trim();
     callWeather(city);
 });
@@ -121,3 +122,8 @@ $("#searchButton").on("click", function() {
 //this gets the most recent city from local storage and displays it when the page loads
 var mostRecent = localStorage.getItem("lastSearched")
 callWeather (mostRecent);
+
+$("#recentlySearchedList").on("click", "li", function(){
+    var city = $(this).text()
+    callWeather(city)
+});
