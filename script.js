@@ -22,9 +22,9 @@ var history = localStorage.getItem("history");
 //this is the beginning of the main call weather function
 function callWeather(city) {
     
-    // Here we are building the URL we need to query the database. We will have to create functions that turn user search parameters into variables and then append those variables to the url. this variable needs to exist inside the on click function because the jquery in the url itself needs to be able to see the variables it's referring to?
+    // Here we are building the URL we need to query the database. one for the main card and one for the five day forecast.
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=${APIKey}`;
-    var FivedayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
+    var FiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
     
     // We create an AJAX call
     $.ajax({
@@ -40,6 +40,8 @@ function callWeather(city) {
     var windSpeed = response.wind.speed;
     var humidity = response.main.humidity;
     var temp = response.main.temp;
+
+    //STEP: we have to set longitude and latitude and do an ajax call inside this ajax call in order to make the uv index work.
     
     // This retrieves our search history and sets it to a variable. The history data's name in local storage is set by the setItem method below.
     var existing = localStorage.getItem("history");
@@ -64,11 +66,29 @@ function callWeather(city) {
     $(".humidity").text("Humidity: " + humidity + "%");
     $(".temp").text("Temperature: " + temp);
 
-        historyColumn();
     
-    });//this is the closing bracket for the main ajax call.
+});//this is the closing bracket for the main ajax call.
 
-    //NEED: add an ajax call for the 5 day forecast data and fill the cards with it
+//this is the ajax call for the 5 day forecast data, next step fill the cards with it
+$.ajax({
+    url: FiveDayURL,
+    method: "GET"
+}).then(function(response) {
+    console.log(response);
+    var day1 = response.list[0].main.temp;
+    var day2 = response.list[1].main.temp;
+    var day3 = response.list[2].main.temp;
+    var day4 = response.list[3].main.temp;
+    var day5 = response.list[4].main.temp;
+    $("#day1").text("Day 1: " + day1);
+    $("#day2").text("Day 2: " + day2);
+    $("#day3").text("Day 3: " + day3);
+    $("#day4").text("Day 4: " + day4);
+    $("#day5").text("Day 5: " + day5);
+    
+});//this is the closing bracket for the 5 day forecast ajax function.
+
+historyColumn();
 
 }//this is the closing bracket for the callWeather function.
 
@@ -77,15 +97,18 @@ function callWeather(city) {
 
 // this function should add each item in the searched city list to be appended to the history column in li form. It works!
 function historyColumn() {
-    var history = localStorage.getItem("history");
-    console.log(history);
-    var historyList = history.split(",");
-    console.log(historyList);
+    var existing = localStorage.getItem("history");
+    var historyList = existing.split(",");
     historyList.forEach(putInHistory);
+    console.log(historyList);
 
     function putInHistory(item) {
-       $("#recentlySearchedList").append("<li>" + item + "</li>")//NEXT: fix this .append function to make the li into a box that activates when clicked
+       // if (historyList.includes(item)) {return} else {
+            $("#recentlySearchedList").append('<li class="list-group-item">' + item + '</li>')
+       // };//closing bracket for if statement
     };//closing bracket for putInHistory function
+
+    //NEXT: give the li an onclick function that activates callWeather(item)
 
 };//closing bracket for historycolumn function
 
